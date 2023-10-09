@@ -1,0 +1,17 @@
+---
+- name: Configure Cisco device
+  gather_fact: False
+  hosts: routers
+  connection: network_cli
+
+  tasks:
+    - name: Basic switch config
+      ios_config:
+        save_when: modified
+        lines:
+          - hostname "{{inventory_hostname}}"
+          - ...
+      register: output
+    - name: Printing output
+      debug: var= output
+   
