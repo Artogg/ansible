@@ -1,0 +1,21 @@
+---
+- name: backup
+  host: routers_group
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: Run show commands
+      ios_command:
+        commands:
+          - show run
+          
+
+
+      register: backup   
+
+    - name: Save sh run
+      copy:
+        contents: "{{backup.stdout[0]}}"
+        dest: "/mon/chemin/{{inventory_hostname}}.txt"
+...
