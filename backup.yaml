@@ -14,15 +14,9 @@
       ansible_network_os: ios
 
   tasks:
-    - name: Run show commands
+    - name: Backup running-config
       ios_command:
         provider: "{{login}}
-        commands:
-          - show run
-      register: backup   
-
-    - name: Save sh run
-      copy:
-        contents: "{{backup.stdout[0]}}"
-        dest: "/mon/chemin/{{inventory_hostname}}.txt"
+        ios_config:
+          backup: yes
 ...
