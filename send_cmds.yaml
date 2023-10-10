@@ -14,4 +14,4 @@
       register: output
     - name: Printing output
       debug: var= output
-   
+...
